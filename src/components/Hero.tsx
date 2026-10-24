@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Download, ArrowRight, CheckCircle2 } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/SocialIcons";
 import { siteConfig } from "@/data/siteConfig";
@@ -110,9 +111,9 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* ── Right column — code visual ── */}
+          {/* ── Right column — profile photo ── */}
           <div className="hidden lg:flex justify-center items-center">
-            <CodeVisual />
+            <ProfilePhoto />
           </div>
         </div>
       </div>
@@ -120,52 +121,51 @@ export default function Hero() {
   );
 }
 
-/* ─── Developer-themed code illustration ────────────────────────────────────── */
-function CodeVisual() {
+/* ─── Profile photo with orange accent ring ─────────────────────────────────── */
+function ProfilePhoto() {
   return (
-    <div className="w-full max-w-[440px]">
-      {/* Window frame */}
-      <div className="card overflow-hidden">
-        {/* Title bar */}
-        <div className="flex items-center gap-2 px-4 py-3 bg-[#fafafa] border-b border-[#e5e5e5]">
-          <span className="w-3 h-3 rounded-full bg-[#ef4444]" aria-hidden="true" />
-          <span className="w-3 h-3 rounded-full bg-[#f59e0b]" aria-hidden="true" />
-          <span className="w-3 h-3 rounded-full bg-[#22c55e]" aria-hidden="true" />
-          <span className="ml-2 text-xs text-[#a3a3a3] font-mono">gowtham.ts</span>
-        </div>
+    <div className="relative w-full max-w-[400px] flex flex-col items-center">
+      {/* Decorative orange ring */}
+      <div
+        className="absolute inset-0 rounded-3xl"
+        style={{
+          background: "linear-gradient(135deg, #f97316 0%, #fed7aa 100%)",
+          transform: "rotate(3deg) scale(1.03)",
+          zIndex: 0,
+          borderRadius: "1.5rem",
+        }}
+        aria-hidden="true"
+      />
 
-        {/* Code content */}
-        <div className="p-5 font-mono text-sm leading-relaxed bg-white" aria-label="Code illustration">
-          <div><span className="text-[#7c3aed]">const</span> <span className="text-[#f97316]">developer</span> <span className="text-[#64748b]">= {"{"}</span></div>
-          <div className="pl-5"><span className="text-[#0ea5e9]">name</span><span className="text-[#64748b]">:</span> <span className="text-[#16a34a]">&quot;Gowtham S&quot;</span><span className="text-[#64748b]">,</span></div>
-          <div className="pl-5"><span className="text-[#0ea5e9]">role</span><span className="text-[#64748b]">:</span> <span className="text-[#16a34a]">&quot;Full-Stack Developer&quot;</span><span className="text-[#64748b]">,</span></div>
-          <div className="pl-5"><span className="text-[#0ea5e9]">focus</span><span className="text-[#64748b]">:</span> <span className="text-[#16a34a]">&quot;AI / ML + Web&quot;</span><span className="text-[#64748b]">,</span></div>
-          <div className="pl-5"><span className="text-[#0ea5e9]">stack</span><span className="text-[#64748b]">: [</span></div>
-          <div className="pl-10 text-[#16a34a]">&quot;Next.js&quot;<span className="text-[#64748b]">,</span></div>
-          <div className="pl-10 text-[#16a34a]">&quot;Spring Boot&quot;<span className="text-[#64748b]">,</span></div>
-          <div className="pl-10 text-[#16a34a]">&quot;Python&quot;<span className="text-[#64748b]">,</span></div>
-          <div className="pl-10 text-[#16a34a]">&quot;PostgreSQL&quot;</div>
-          <div className="pl-5 text-[#64748b]">]<span className="text-[#64748b]">,</span></div>
-          <div className="pl-5"><span className="text-[#0ea5e9]">available</span><span className="text-[#64748b]">:</span> <span className="text-[#f97316]">true</span></div>
-          <div className="text-[#64748b]">{"}"}</div>
-          <div className="mt-3 flex items-center gap-2">
-            <span className="w-2 h-4 bg-[#f97316] opacity-70 animate-pulse rounded-sm" aria-hidden="true" />
-          </div>
-        </div>
+      {/* Photo card */}
+      <div
+        className="relative z-10 w-full rounded-3xl overflow-hidden shadow-xl border-4 border-white"
+        style={{ aspectRatio: "4/5" }}
+      >
+        <Image
+          src="/images/gowtham.png"
+          alt="Gowtham S — Freelance Web Developer & AI/ML Developer"
+          fill
+          style={{ objectFit: "cover", objectPosition: "top center" }}
+          priority
+          sizes="(max-width: 1024px) 0px, 400px"
+        />
       </div>
 
-      {/* Stats row */}
-      <div className="grid grid-cols-3 gap-3 mt-4">
-        {[
-          { num: "3+", label: "Projects Built" },
-          { num: "3", label: "Services Offered" },
-          { num: "CSE", label: "AI / ML Major" },
-        ].map((stat) => (
-          <div key={stat.label} className="card p-4 text-center">
-            <div className="text-xl font-extrabold text-[#f97316]">{stat.num}</div>
-            <div className="text-xs text-[#737373] mt-0.5 leading-tight">{stat.label}</div>
+      {/* Floating name card */}
+      <div
+        className="absolute bottom-4 left-4 right-4 z-20 bg-white/95 backdrop-blur-sm rounded-2xl px-5 py-3 shadow-lg border border-[#e5e5e5]"
+      >
+        <div className="flex items-center justify-between">
+          <div>
+            <div className="font-bold text-[#171717] text-sm">Gowtham S</div>
+            <div className="text-xs text-[#f97316] font-medium">Full-Stack Developer · AI/ML</div>
           </div>
-        ))}
+          <div className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse-dot" aria-hidden="true" />
+            <span className="text-xs text-[#737373] font-medium">Available</span>
+          </div>
+        </div>
       </div>
     </div>
   );
